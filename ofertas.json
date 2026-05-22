@@ -1,0 +1,44 @@
+[
+    {
+        "titulo": "Fibra 300Mb Hogar",
+        "categoria": "Particulares",
+        "descripcion": "Ideal para navegación y teletrabajo.",
+        "descripcion_larga": "Conexión simétrica de alta estabilidad. Perfecta para conectar hasta 5 dispositivos a la vez sin pérdida de velocidad.",
+        "precio": "24.90"
+    },
+    {
+        "titulo": "Pack Gaming Algeciras",
+        "categoria": "Particulares",
+        "descripcion": "Máxima velocidad con latencia mínima.",
+        "descripcion_larga": "Fibra de 1Gb optimizada para servidores de juegos online. Incluye router Wi-Fi 6 de última generación.",
+        "precio": "34.95"
+    },
+    {
+        "titulo": "Internet + TV Family",
+        "categoria": "Particulares",
+        "descripcion": "Todo el entretenimiento para tu casa.",
+        "descripcion_larga": "Fibra 600Mb con paquete de televisión premium incluido. Cine, series y documentales en 4K.",
+        "precio": "39.90"
+    },
+    {
+        "titulo": "Fibra Puerto Simétrica",
+        "categoria": "Empresas",
+        "descripcion": "Conexión profesional para el sector logístico.",
+        "descripcion_larga": "Línea dedicada de 1Gb con garantía de caudal. IP fija incluida para acceso remoto a servidores y cámaras.",
+        "precio": "45.00"
+    },
+    {
+        "titulo": "Mantenimiento IT Pro",
+        "categoria": "Empresas",
+        "descripcion": "Soporte técnico para tu oficina o comercio.",
+        "descripcion_larga": "Asistencia técnica presencial y remota. Copias de seguridad en la nube y limpieza de virus semanal.",
+        "precio": "59.90"
+    },
+    {
+        "titulo": "Cámaras Puerto 24h",
+        "categoria": "Empresas",
+        "descripcion": "Seguridad avanzada con IA para locales.",
+        "descripcion_larga": "Sistema de 4 cámaras IP con grabación en la nube y detección de movimiento enviada a tu móvil.",
+        "precio": "29.95"
+    }
+]

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infonet Algeciras | Gestión de Ofertas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="barra-progreso-contenedor">
+        <div id="barra-progreso"></div>
+    </div>
+
+    <div id="loader">
+        <div class="spinner"></div>
+        <p style="color: #0056b3; font-weight: bold; margin-top: 15px;">Cargando Infonet...</p>
+    </div>
+
+    <a href="https://wa.me/34670668533?text=Hola%20Infonet!%20Vengo%20de%20la%20web" class="whatsapp-float" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+
+    <header>
+        <img src="img/infonet logo.png" alt="Logo Infonet" class="logo-img">
+        <h1>Infonet Algeciras</h1>
+        <p>Soluciones Tecnológicas - Sector Puerto de Algeciras</p>
+    </header>
+
+    <nav id="filtros">
+        <button onclick="filtrarOfertas('Todos')">Todas las ofertas</button>
+        <button onclick="filtrarOfertas('Particulares')">Particulares</button>
+        <button onclick="filtrarOfertas('Empresas')">Empresas</button>
+    </nav>
+
+    <main id="contenedor-ofertas"></main>
+
+    <section id="recomendador" style="background: linear-gradient(135deg, #0056b3, #003d80); color: white; padding: 40px; text-align: center; border-radius: 15px; margin: 20px;">
+        <h2>¿No sabes qué tarifa elegir? 💡</h2>
+        <p>Selecciona tu perfil y te diremos cuál es tu mejor opción</p>
+        <div style="margin-top: 20px;">
+            <button class="btn-perfil" onclick="recomendar('gaming')">Soy Gamer / Streaming</button>
+            <button class="btn-perfil" onclick="recomendar('hogar')">Uso doméstico / Teletrabajo</button>
+            <button class="btn-perfil" onclick="recomendar('empresa')">Soy Empresa / Puerto</button>
+        </div>
+        <div id="resultado-recomendacion" style="margin-top: 30px; font-size: 1.2rem; font-weight: bold; min-height: 50px;"></div>
+    </section>
+
+    <section id="contacto" style="max-width: 600px; margin: 40px auto; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+    <h2 style="color: #0056b3; text-align: center;">Solicitar presupuesto personalizado</h2>
+    
+    <form id="formulario-contacto">
+        <input type="hidden" id="servicio" name="servicio" value="Ninguno">
+
+        <div class="grupo-input" style="margin-bottom: 15px;">
+            <label style="display: block; font-weight: bold;">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre..." required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+        </div>
+        
+        <div class="grupo-input" style="margin-bottom: 15px;">
+            <label style="display: block; font-weight: bold;">Email de contacto</label>
+            <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
+        </div>
+
+        <div class="grupo-input" style="margin-bottom: 15px;">
+            <label style="display: block; font-weight: bold;">Mensaje u Observaciones (Opcional)</label>
+            <textarea id="mensaje-usuario" name="mensaje" placeholder="Cuéntanos qué necesitas..." style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; height: 100px; resize: none;"></textarea>
+        </div>
+        
+        <button type="submit" id="btn-enviar" style="width: 100%; background: #28a745; color: white; border: none; padding: 15px; border-radius: 8px; font-weight: bold; cursor: pointer;">Enviar solicitud</button>
+    </form>
+    
+    <div id="mensaje-exito" style="display:none; margin-top: 15px; text-align: center; font-weight: bold; color: #28a745;"></div>
+</section>
+
+    <section id="mapa" style="max-width: 600px; margin: 40px auto; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+        <h3 style="text-align: center; color: #0056b3; margin-top: 15px;">Nuestra ubicación en Algeciras</h3>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3253.9!2d-5.4!3d36.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDA2JzAwLjAiTiA1wrAyNCc3LjkiVw!5e0!3m2!1ses!2ses!4v123456789" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </section>
+
+    <footer class="footer-completo">
+        <div class="footer-container">
+            <div class="footer-col">
+                <img src="img/infonet logo.png" alt="Infonet Logo" class="footer-logo">
+                <p>Soluciones en informática, redes y tecnología en Algeciras.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Horarios</h3>
+                <p>Lunes a Viernes: 9:30h - 14:00h / 17:00h - 20:30h</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Adrián García - Proyecto Infonet</p>
+        </div>
+    </footer>
+
+    <div id="miModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="cerrarModal()">×</span>
+            <div id="detalle-oferta"></div> 
+            <button onclick="autoRellenarDesdeModal()" class="btn-enviar" style="margin-top:20px; width: 100%;">Confirmar Interés</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
