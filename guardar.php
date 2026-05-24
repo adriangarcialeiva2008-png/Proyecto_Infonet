@@ -1,39 +1,50 @@
 <?php
-header('Content-Type: application/json');
+error_reporting(0);
+ini_set('display_errors', 0);
+header('Content-Type: application/json; charset=utf-8');
 
-$servidor = "localhost";
-$usuario = "root";
+function json_response($status, $message) {
+    echo json_encode(["status" => $status, "message" => $message]);
+    exit();
+}
+
+$servername = "localhost";
+$username = "root";
 $password = "";
-$base_datos = "infonet_db";
+$dbname = "infonet_db";
 
-$conexion = new mysqli($servidor, $usuario, $password, $base_datos);
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-if ($conexion->connect_error) {
-    echo json_encode(["status" => "error", "message" => "Fallo de conexión"]);
-    exit;
+if ($conn->connect_error) {
+    json_response("error", "Conexión fallida al servidor");
 }
 
-// Recogemos los datos usando el atributo 'name' del HTML
-$nombre   = $_POST['nombre'] ?? '';
-$email    = $_POST['email'] ?? '';
-$mensaje  = $_POST['mensaje'] ?? '';
-$servicio = $_POST['servicio'] ?? '';
+// Recogemos las variables usando los atributos 'name' que pusimos en el HTML de index.php
+$nombre = isset($_POST['nombre']) ? trim($_POST['nombre']) : '';
+$email = isset($_POST['email']) ? trim($_POST['email']) : '';
+$servicio = isset($_POST['servicio']) ? trim($_POST['servicio']) : '';
+$mensaje = isset($_POST['mensaje']) ? trim($_POST['mensaje']) : '';
 
-if (empty($nombre) || empty($email)) {
-    echo json_encode(["status" => "error", "message" => "Faltan campos obligatorios"]);
-    exit;
+if (empty($nombre) || empty($email) || empty($servicio)) {
+    json_response("error", "Por favor, rellena todos los campos obligatorios.");
 }
 
-$sql = "INSERT INTO solicitudes (nombre, email, mensaje, servicio) VALUES (?, ?, ?, ?)";
-$stmt = $conexion->prepare($sql);
-$stmt->bind_param("ssss", $nombre, $email, $mensaje, $servicio);
+// Preparamos la inserción apuntando exactamente a tus columnas: nombre, email, servicio, mensaje
+$sql = "INSERT INTO presupuestos (nombre, email, servicio, mensaje) VALUES (?, ?, ?, ?)";
+$stmt = $conn->prepare($sql);
+
+if (!$stmt) {
+    json_response("error", "Error en la preparación de la base de datos: " . $conn->error);
+}
+
+$stmt->bind_param("ssss", $nombre, $email, $servicio, $mensaje);
 
 if ($stmt->execute()) {
-    echo json_encode(["status" => "success", "message" => "¡Guardado con éxito!"]);
+    json_response("success", "¡Tu solicitud de presupuesto ha sido enviada con éxito!");
 } else {
-    echo json_encode(["status" => "error", "message" => "Error al guardar"]);
+    json_response("error", "No se pudo guardar el presupuesto: " . $stmt->error);
 }
 
 $stmt->close();
-$conexion->close();
+$conn->close();
 ?>
